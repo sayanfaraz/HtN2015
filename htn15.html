@@ -4,17 +4,29 @@
 
 <body>
 	
-<!------------------------PAGE LAYOUT------------------------>
+<!--PAGE LAYOUT-->
 	
 	<!--CONTAINER-FLUID-->
 	<div class="container-fluid" id="Intro">
   		<!--INTRODUCTION DIV-->
-  		<div class="col-md-12">
-  			{{> introduction}}
+  		<div class="jumbotron">
+  			<div class="col-md-12">
+  				{{> introduction}}
+	  		</div>
   		</div>
   		
   		<!--APP PAGE DIV-->
   		<div class="col-md-12">
+  			
+  			<!--profiles-->
+  			<div class="row">
+  				<div class="col-md-6">
+  					{{>profileDisplay}}
+  				</div>
+  				<div class="col-md-6">
+  					{{>profileDisplay}}
+  				</div>
+  			</div>
   			
   			<!--pagination-->
   			<nav>
@@ -34,7 +46,7 @@
 </body>
 
 
-<!------------------------TEMPLATES------------------------>
+<!--TEMPLATES-->
 
 <!--LOGIN-->
 <template name="login">
@@ -49,23 +61,55 @@
 
 <!--INTRODUCTION TEMPLATE-->
 <template name="introduction">
-	<div class="col-md-12">
-		<!--input group-->
-		<div class="input-group input-group-lg">
-			<span class="input-group-addon" id="Intro-title">I want to explore </span>
+
+	<!--input group-->
+	<form class="form-inline">
+		<div class="form-group">
+			<h1>I want to explore</h1>
 			<input type="text" class="form-control" name="user-interests">
 			<input type="submit" class="btn btn-default" name="Go">
 		</div>
-	</div>
+	</form>
+	
+
 	
 </template>
 
 <!--PROFILE DISPLAY TEMPLATE-->
 <template name="profileDisplay">
-	<div class="col-md-6">
-		<!--name-->
+	<!--will use a button; tht way user can click on profile to go to profile page-->
+	<!--which profile page? fb? our app's?-->
+	<div class="row">
 		<!--avatar-->
-		<!--bio-->
-		<!--interests-->
+		<div class="col-md-3">
+			<a href="#" class="thumbnail">
+				<!--insert image here-->
+				<!--*****************-->
+				<img src="http://cdn.photoaffections.com/images/icon-profile.png" alt="Profile Pic">
+		    	</a>
+		</div>
+		<!--info-->
+		<div class="col-md-3">
+			<!--name-->
+			<h1>Name</h1>
+			
+			<!--bio-->
+			<p>
+				Literally lumbersexual stumptown vinyl messenger bag, XOXO Kickstarter lo-fi.
+				Lumbersexual mlkshk readymade 3 wolf moon, seitan Bushwick heirloom aesthetic normcore gastropub.
+				You probably haven't heard of them brunch Williamsburg hashtag iPhone Marfa, cardigan McSweeney's Brooklyn biodiesel cred beard.
+			</p>
+			<!--interests-->
+			{{>interestDisplay}}
+		</div>
 	</div>
+	<!--chat button-->
+	<div class="btn btn-default" aria-label="Chat!" id="profileDisplayChat">
+		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+	</div>
+</template>
+
+<!--Interests Template-->
+<template name="interestDisplay">
+	<span class="label label-default">Interest</span>
 </template>
