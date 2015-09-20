@@ -1,6 +1,5 @@
 <head>
-  <title> Hack The North 2015 </title>
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <title> NESTEA </title>
 </head>
 
 <template name="htn15">
@@ -24,91 +23,107 @@
 
 <!--TEMPLATES-->
 
-<template name="interestSearch">
-                <!--APP PAGE DIV-->
-            <div class="row">
-                <!--VERTICAL NAVBAR-->
-                <div class="col-md-2">
-                    <nav class="navbar navbar-default" role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        <a class="navbar-brand" href="#">Brand</a>
-                    </div>
-                
-                  <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Link</a></li>
-                      <li><a href="#">Link</a></li>
-                    </ul>
-                  </div><!-- /.navbar-collapse -->
-                </nav>
+<!--USER FUNCTIONALITY TEMPLATE-->
+<template name="userFunctionalityPage">
+    <!--APP PAGE DIV-->
+    <div class="row">
+        
+        {{>interestNavBar}}
+        {{>profileHolder}}
+        
+    </div>
+</template>
+
+
+<!--INTEREST NAVBAR TEMPLATE-->
+<template name="interestNavBar">
+    <!--VERTICAL NAVBAR-->
+    <div class="col-md-2">
+        <!--header-->
+        <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Interests</a>
             </div>
-            <!--Profile Section-->
-            <div class="col-md-10">
-                <!--profiles-->
-                <div class="row">
-                    <div class="col-md-5">
-                        {{>profileDisplay}}
-                    </div>
-                    <div class="col-md-5">
-                        {{>profileDisplay}}
-                    </div>
-                </div>
+    
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+              {{#each interests}}
+              <li>
+                  <a href="#">
+                      {{this}}
+                  </a>
+              </li>
+              {{/each}}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</template>
+
+<!--PROFILE HOLDER TEMPLATE-->
+<template name="profileHolder">
+    <!--Profile Section-->
+    <div class="col-md-10">
+        <!--profiles-->
+        <div class="row">
+            {{#each user}}
+                <!--will use a button; that way user can click on profile to go to profile page-->
+            	<!--which profile page? fb? our app's?-->
+            	<div class="col-md-5">
+            	    <div class="row">
+                		<div class="col-md-2">
+                			<a href="#" class="thumbnail">
+                				<!--insert image here-->
+                				<!--*****************-->
+                				<img src="http://cdn.photoaffections.com/images/icon-profile.png" alt="Profile Pic">
+                		    	</a>
+                		</div>
+                		<!--info-->
+                		<div class="col-md-10">
+                			<!--name-->
+                			<h1>{{firstname}}</h1>
+                			
+                			<!--bio-->
+                			<p>
+                				{{bio}}
+                			</p>
+                			<!--interests-->
+                			{{#each interests}}
+                			    <span class="label label-default">{{this}}</span>
+                			{{/each}}
+                		</div>
+                	</div>
                 
-                <!--pagination-->
-                <nav>
-                  <ul class="pager">
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="#">Next</a></li>
-                  </ul>
-                </nav>
-            </div>
+                	<!--chat button-->
+                	<div class="btn btn-default" aria-label="Chat!" id="profileDisplayChat">
+                		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                	</div>
+            	</div>
+            {{/each}}
         </div>
-
-</template>
-	
-	<!--PROFILE DISPLAY TEMPLATE-->
-<template name="profileDisplay">
-	<!--will use a button; that way user can click on profile to go to profile page-->
-	<!--which profile page? fb? our app's?-->
-	<div class="row">
-		<div class="col-md-2">
-			<a href="#" class="thumbnail">
-				<!--insert image here-->
-				<!--*****************-->
-				<img src="http://cdn.photoaffections.com/images/icon-profile.png" alt="Profile Pic">
-		    	</a>
-		</div>
-		<!--info-->
-		<div class="col-md-10">
-			<!--name-->
-			<h1>Name</h1>
-			
-			<!--bio-->
-			<p>
-				Literally lumbersexual stumptown vinyl messenger bag, XOXO Kickstarter lo-fi.
-				Lumbersexual mlkshk readymade 3 wolf moon, seitan Bushwick heirloom aesthetic normcore gastropub.
-				You probably haven't heard of them brunch Williamsburg hashtag iPhone Marfa, cardigan McSweeney's Brooklyn biodiesel cred beard.
-			</p>
-			<!--interests-->
-			{{> interestDisplay}}
-		</div>
-	</div>
-
-	<!--chat button-->
-	<div class="btn btn-default" aria-label="Chat!" id="profileDisplayChat">
-		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-	</div>
+        
+        <!--pagination-->
+        <nav>
+          <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </nav>
+    </div>
 </template>
 
-<!--Interests Template-->
-<template name="interestDisplay">
-	<span class="label label-default">Interest</span>
+
+<!--INTERESTS-->
+
+<!--User's interests-->
+<template name="interests_name_user">
+    {{interests}}
 </template>
